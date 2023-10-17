@@ -1,0 +1,38 @@
+﻿/* CSS goes here */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.content {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #e4e4e4;
+    background-color: #fff;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+    .header h1 {
+        margin: 0;
+        color: #333;
+    }
+
+    .header p {
+        margin-top: 5px;
+        color: #777;
+    }
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+    .item:last-child {
+        border-bottom: none;
+    }
