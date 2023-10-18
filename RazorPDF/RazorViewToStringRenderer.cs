@@ -38,12 +38,38 @@ public static class RazorPDFExtensions
     {
         if (arg2.Contains("libwkhtmltox"))
         {
-            string sideLoadedAsm = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "Resources",
-                                   (IntPtr.Size == 8) ? "64 bit" : "32 bit",
-                                                      $"libwkhtmltox{(RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".dll" : ".so")}");
+            string runtimeIdentifier;
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                runtimeIdentifier = "win";
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                runtimeIdentifier = "linux";
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                runtimeIdentifier = "osx";
+            }
+            else
+            {
+                return IntPtr.Zero; // Unsupported platform
+            }
+
+            string bitness = (IntPtr.Size == 8) ? "x64" : "x86";
+            string fileExtension = (runtimeIdentifier == "win") ? ".dll" : (runtimeIdentifier == "linux" ? ".so" : ".dylib");
+
+            string sideLoadedAsm = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location),
+                                                "runtimes",
+                                                $"{runtimeIdentifier}-{bitness}",
+                                                "native",
+                                                $"libwkhtmltox{fileExtension}");
+
             return NativeLibrary.Load(sideLoadedAsm);
         }
-        else return IntPtr.Zero;
+
+        return IntPtr.Zero;
     }
 }
 

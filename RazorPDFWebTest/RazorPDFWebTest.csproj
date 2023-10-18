@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RazorPDF\RazorPDF.csproj" />
+    <PackageReference Include="Theoistic.RazorPDF" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

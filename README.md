@@ -13,7 +13,7 @@ RazorPDF is a powerful library for .NET that provides capabilities to build PDF 
 You can add RazorPDF to your project via the NuGet package manager. Use the following command in your Package Manager Console:
 
 ```
-Install-Package RazorPDF
+Install-Package Theoistic.RazorPDF
 ```
 
 ## Configuration
