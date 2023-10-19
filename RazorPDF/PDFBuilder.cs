@@ -6,6 +6,7 @@ namespace RazorPDF;
 public class PDFBuilder : IDisposable
 {
     private readonly RazorViewToStringRenderer _renderer;
+    private readonly ThreadSafeHTMLToPDFConverter converter;
     private IServiceScope scope;
 
     private string IncludeCSS;
@@ -59,6 +60,7 @@ public class PDFBuilder : IDisposable
     {
         scope = RazorPDFExtensions.ServiceProvider.CreateScope();
         _renderer = scope.ServiceProvider.GetRequiredService<RazorViewToStringRenderer>();
+        converter = scope.ServiceProvider.GetRequiredService<ThreadSafeHTMLToPDFConverter>();
     }
 
     public PDFBuilder RazorView<TModel>(string view, TModel model)
@@ -106,8 +108,6 @@ public class PDFBuilder : IDisposable
         }
 
         var _content = await BuildHTMLAsync();
-
-        var converter = new ThreadSafeHTMLToPDFConverter();
 
         ObjectSettings objSetting = this.ObjectSettings;
         objSetting.HtmlContent = _content;
