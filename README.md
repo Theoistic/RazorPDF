@@ -44,7 +44,7 @@ First, create your Razor view (e.g., PDFViews/NicePDF.cshtml). This view will co
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="~/PDFStyle.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <h1>My Nice PDF</h1>
@@ -86,6 +86,14 @@ public async Task CreatePDF()
 ```
 
 This will create a PDF document from your Razor view with the data you provided and save it as test.pdf.
-Contributing
+
+### Style
+
+If you need to have a specific style, I would recommend using a CSS file and injecting it using the InjectCSS method.
+the InjectCSS method takes a string as a parameter, this string is the (relative) path to the CSS file you want to inject.
+since we cannot use relative paths, its converted to absolute path and the link stylesheet is injected right above the closing head tag.
+Once the CSS has been injected with a full absolute path, it can reference relative images and fonts.
+
+## Contributing
 
 Contributions to the RazorPDF library are welcome! If you're interested in improving RazorPDF

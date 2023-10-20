@@ -1,6 +1,13 @@
 ﻿/* CSS goes here */
+@font-face {
+    font-family: 'CustomPet';
+    font-style: normal;
+    font-weight: normal;
+    src: url('Wicked Autumn.ttf') format('truetype');
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: CustomPet;
 }
 
 .content {

@@ -17,9 +17,9 @@ namespace RazorPDFWebTest.Pages
 
         public async Task OnGetAsync()
         {
-            Parallel.For(0, 5, async (x) =>
+            Parallel.For(0, 1, async (x) =>
             {
-                var pdf = await new PDFBuilder()
+                var pdfConfig = new PDFBuilder()
                     .Settings(x =>
                     {
                         x.UseCompression = true;
@@ -32,8 +32,11 @@ namespace RazorPDFWebTest.Pages
                         new NicePDFModel.Item { Name = "Something else", Value = "50.42" },
                         new NicePDFModel.Item { Name = "Something more", Value = "21.42" },
                         }
-                    })
-                    .BuildAsync();
+                    });
+
+                var html = await pdfConfig.BuildHTMLAsync();
+
+                var pdf = await pdfConfig.BuildAsync();
 
                 System.IO.File.WriteAllBytes($"test{x}.pdf", pdf);
             });

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Text.RegularExpressions;
+using System.Web;
 
 namespace RazorPDF;
 
@@ -82,7 +83,10 @@ public class PDFBuilder : IDisposable
         if(!File.Exists(file))
             throw new FileNotFoundException("CSS file not found.", file);
 
-        IncludeCSS = File.ReadAllText(file);
+        var fullPath = "file:///" + Path.GetFullPath(file).Replace("\\", "/").Replace(" ", "%20");
+
+        IncludeCSS = $"<link href=\"{fullPath}\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\">";
+
 
         return this;
     }
@@ -93,7 +97,7 @@ public class PDFBuilder : IDisposable
 
         if (!string.IsNullOrEmpty(IncludeCSS))
         {
-            _content = Regex.Replace(_content, @"</head>", $"<style>{Environment.NewLine}{IncludeCSS}{Environment.NewLine}</style>" + Environment.NewLine + "</head>");
+            _content = Regex.Replace(_content, @"</head>", $"{Environment.NewLine}{IncludeCSS}{Environment.NewLine}</head>");
         }
 
         return _content;
