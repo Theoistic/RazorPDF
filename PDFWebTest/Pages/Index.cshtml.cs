@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using RazorPDF;
-using RazorPDFWebTest.PDFViews;
-using RazorPDFWebTest.Views.PDFViews;
+using Theoistic.PDF;
+using Theoistic.PDFWebTest.PDFViews;
+using Theoistic.PDFWebTest.Views.PDFViews;
 
-namespace RazorPDFWebTest.Pages
+namespace Theoistic.PDFWebTest.Pages
 {
     public class IndexModel : PageModel
     {
@@ -17,7 +17,7 @@ namespace RazorPDFWebTest.Pages
 
         public async Task OnGetAsync()
         {
-            Parallel.For(0, 1, async (x) =>
+            /*Parallel.For(0, 1, async (x) =>
             {
                 var pdfConfig = new PDFBuilder()
                     .Settings(x =>
@@ -39,7 +39,7 @@ namespace RazorPDFWebTest.Pages
                 var pdf = await pdfConfig.BuildAsync();
 
                 System.IO.File.WriteAllBytes($"test{x}.pdf", pdf);
-            });
+            });*/
         }
     }
 }

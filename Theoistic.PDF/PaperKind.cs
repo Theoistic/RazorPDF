@@ -1,4 +1,4 @@
-﻿namespace RazorPDF;
+﻿namespace Theoistic.PDF;
 
 public enum PaperKind : int
 {

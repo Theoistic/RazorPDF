@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 
-namespace RazorPDF;
+namespace Theoistic.PDF;
 
 internal enum CustomUnmanagedType
 {

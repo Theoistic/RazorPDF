@@ -4,25 +4,23 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Runtime.Loader;
 
-namespace RazorPDF;
+namespace Theoistic.PDF;
 
-public static class RazorPDFExtensions
+public static class TheoisticPDFExtensions
 {
     internal static IServiceProvider ServiceProvider { get; set; }
 
-    public static IServiceCollection AddRazorPDF(this IServiceCollection services)
+    public static IServiceCollection AddTheoisticPDF(this IServiceCollection services)
     {
         AssemblyLoadContext.Default.ResolvingUnmanagedDll += Default_ResolvingUnmanagedDll;
-        services.AddControllersWithViews().AddRazorRuntimeCompilation();
-        services.AddTransient<RazorViewToStringRenderer>();
         services.AddSingleton<ThreadSafeHTMLToPDFConverter>();
 
         return services;
     }
 
-    public static WebApplication UseRazorPDF(this WebApplication webApplication)
+    public static IApplicationBuilder UseTheoisticPDF(this IApplicationBuilder webApplication)
     {
-        ServiceProvider = webApplication.Services;
+        ServiceProvider = webApplication.ApplicationServices;
         return webApplication;
     }
 

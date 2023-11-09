@@ -1,4 +1,4 @@
-﻿namespace RazorPDF;
+﻿namespace Theoistic.PDF;
 
 internal interface IDocument : ISettings
 {

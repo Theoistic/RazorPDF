@@ -1,10 +1,10 @@
-using RazorPDF;
+using Theoistic.PDF;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddRazorPDF();
+builder.Services.AddTheoisticPDF();
 
 var app = builder.Build();
 
@@ -16,7 +16,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseRazorPDF();
+app.UseTheoisticPDF();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

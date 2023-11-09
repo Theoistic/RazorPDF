@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace RazorPDFWebTest.Views.PDFViews
+namespace Theoistic.PDFWebTest.Views.PDFViews
 {
     public class NicePDFModel
     {

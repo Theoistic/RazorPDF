@@ -2,11 +2,10 @@
 using System.Text.RegularExpressions;
 using System.Web;
 
-namespace RazorPDF;
+namespace Theoistic.PDF;
 
 public class PDFBuilder : IDisposable
 {
-    private readonly RazorViewToStringRenderer _renderer;
     private readonly ThreadSafeHTMLToPDFConverter converter;
     private IServiceScope scope;
 
@@ -59,16 +58,8 @@ public class PDFBuilder : IDisposable
 
     public PDFBuilder()
     {
-        scope = RazorPDFExtensions.ServiceProvider.CreateScope();
-        _renderer = scope.ServiceProvider.GetRequiredService<RazorViewToStringRenderer>();
+        scope = TheoisticPDFExtensions.ServiceProvider.CreateScope();
         converter = scope.ServiceProvider.GetRequiredService<ThreadSafeHTMLToPDFConverter>();
-    }
-
-    public PDFBuilder RazorView<TModel>(string view, TModel model)
-    {
-        this._view = view;
-        this._model = model;
-        return this;
     }
 
     public PDFBuilder Settings(Action<GlobalSettings> settings)
@@ -91,19 +82,7 @@ public class PDFBuilder : IDisposable
         return this;
     }
 
-    public async Task<string> BuildHTMLAsync()
-    {
-        var _content = await _renderer.RenderViewToStringAsync(_view, _model);
-
-        if (!string.IsNullOrEmpty(IncludeCSS))
-        {
-            _content = Regex.Replace(_content, @"</head>", $"{Environment.NewLine}{IncludeCSS}{Environment.NewLine}</head>");
-        }
-
-        return _content;
-    }
-
-    public async Task<byte[]> BuildAsync(Action<ObjectSettings>? settings = null)
+    public async Task<byte[]> BuildAsync(string html, Action<ObjectSettings>? settings = null)
     {
         if (settings != null)
         {
@@ -111,7 +90,12 @@ public class PDFBuilder : IDisposable
             settings(this.ObjectSettings);
         }
 
-        var _content = await BuildHTMLAsync();
+        var _content = html;
+
+        if (!string.IsNullOrEmpty(IncludeCSS))
+        {
+            _content = Regex.Replace(_content, @"</head>", $"{Environment.NewLine}{IncludeCSS}{Environment.NewLine}</head>");
+        }
 
         ObjectSettings objSetting = this.ObjectSettings;
         objSetting.HtmlContent = _content;

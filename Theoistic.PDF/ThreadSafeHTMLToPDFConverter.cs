@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Reflection;
 
-namespace RazorPDF;
+namespace Theoistic.PDF;
 
 internal class ThreadSafeHTMLToPDFConverter
 {

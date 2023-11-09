@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace RazorPDFWebTest.Pages
+namespace Theoistic.PDFWebTest.Pages
 {
     public class PrivacyModel : PageModel
     {

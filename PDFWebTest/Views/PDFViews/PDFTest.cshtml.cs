@@ -1,6 +1,6 @@
 
 
-namespace RazorPDFWebTest.PDFViews
+namespace Theoistic.PDFWebTest.PDFViews
 {
     public class PDFTest
     {
